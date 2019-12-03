@@ -76,8 +76,8 @@ int main(){
 			if(status < 0) break;
 			status -= ((s[i] == ',') || (s[i] == '.'));
 			
-			a = (status == 1)? append_num(a, (long long)s[i]-'0', exp++) : a;
-			b = (status == -1)? b : append_num(b, (long long)s[i]-'0', exp++);
+			a = (status == -1)? append_num(a, (long long)s[i]-'0', exp++) : a;
+			b = (status == 1)? b : append_num(b, (long long)s[i]-'0', exp++);
 		}
 		
 		if(!a && !b) zero++;
