@@ -39,7 +39,7 @@ long long cmp(vector<long long> a, vector<long long> b){
 	}
 	
 	// marking possible shift count
-	possible_ans[ans] = 1;
+	possible_ans[ans]++;
 	
 	return ans;
 }
@@ -105,9 +105,7 @@ int main(){
 	}
 	
 	for(auto x : possible_ans)
-		cout << x.first << " ";
-	cout << '\n';
+		cout << x.first << " " << x.second << '\n';
 	 
 	return 0;
 }
-
