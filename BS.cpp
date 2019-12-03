@@ -34,7 +34,7 @@ long long cmp(vector<long long> a, vector<long long> b){
 			
 		if(diff_sum < min_dif){
 			min_dif = diff_sum;
-			ans = (CAPACITY/3) - start_point;
+			ans = start_point-(CAPACITY/3);
 		}
 	}
 	
@@ -56,7 +56,7 @@ int main(){
 	cin.tie(0);
 	
 	ifstream cin;
-	cin.open("./third/data/dual_30l_pin0.txt");
+	cin.open("./third/data/dual_90l_pin0.txt");
 	
 	if(!cin){
 		cout << "Unable to open file" << endl;
@@ -69,16 +69,28 @@ int main(){
 	
 	while(cin >> s){
 		//cout << s << endl;
-		long long status = 1, a = 0, b = 0, exp = 0;
+		bool save = false, save_a = true;
+		long long a = 0, b = 0, exp = 0;
+		string sa = "", sb = "";
+		
 		
 		// string parsing to number for each row in file
-		for(int i = s.size()-1 ; i >= 0 ; i--){
-			if(status < 0) break;
-			status -= ((s[i] == ',') || (s[i] == '.'));
+		for(int i = 0 ; i < s.size() ; i++){
+			if(s[i] == ',') save = false, save_a = false;
 			
-			a = (status == -1)? append_num(a, (long long)s[i]-'0', exp++) : a;
-			b = (status == 1)? b : append_num(b, (long long)s[i]-'0', exp++);
+			if(save && save_a) sa += s[i];
+			if(save && !save_a) sb += s[i];
+			
+			if(s[i] == '.') save = true;
 		}
+		
+		for(int i = sa.size()-1 ; i >= 0 ; i--)
+			a = append_num(a, (long long)sa[i]-'0', exp++);
+			
+		exp = 0;
+		
+		for(int i = sb.size()-1 ; i >= 0 ; i--)
+			b = append_num(b, (long long)sb[i]-'0', exp++);
 		
 		if(!a && !b) zero++;
 		else zero = 0;
@@ -101,11 +113,16 @@ int main(){
 			ans = cmp(data_a, data_b);
 			init();
 		}
-		
 	}
 	
-	for(auto x : possible_ans)
+	pair<long long, long long> result = make_pair(0, 0);
+	
+	for(auto x : possible_ans){
 		cout << x.first << " " << x.second << '\n';
-	 
+		if(x.second > result.second) result = make_pair(x.first, x.second);
+	}
+		
+	cout << "result: " << result.first << " " << result.second << '\n';
+	
 	return 0;
 }
