@@ -56,7 +56,8 @@ int main(){
 	cin.tie(0);
 	
 	ifstream cin;
-	cin.open("./third/data/dual_90l_pin0.txt");
+	ofstream file_cout("./fourth/data/measurements_30l_N.txt");
+	cin.open("./fourth/data/dual_30l_pin0_N.txt");
 	
 	if(!cin){
 		cout << "Unable to open file" << endl;
@@ -111,6 +112,7 @@ int main(){
 		
 		if(data_a.size() == CAPACITY){
 			ans = cmp(data_a, data_b);
+			file_cout << ans+11 << '\n';
 			init();
 		}
 	}
@@ -124,5 +126,8 @@ int main(){
 		
 	cout << "result: " << result.first << " " << result.second << '\n';
 	
+	file_cout.close();
+	
 	return 0;
 }
+

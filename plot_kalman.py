@@ -33,4 +33,4 @@ def Plot(filenames):
 		plt.show()
 		plt.clf()
 		
-Plot(["N_30l_kalman_output.txt"])
+Plot(["N_30l_kalman_output.txt", "N_30r_kalman_output.txt"])
